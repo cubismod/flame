@@ -38,7 +38,7 @@ jobs:
       - name: build and push
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
         with:
-          context: .docker/Dockerfile
+          context: .
           push: true
           tags: ${{ env.REPO }}:${{ github.sha }},${{ env.REPO }}:latest,${{ env.REPO }}:dev-latest
           cache-from: type=registry,ref=${{ env.CACHE_REPO }}
@@ -93,7 +93,7 @@ jobs:
       - name: build and push
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
         with:
-          context: .docker/Dockerfile
+          context: .
           push: true
           tags: ${{ env.REPO }}:${{ github.sha }},${{ env.REPO }}:dev-latest
           cache-from: type=registry,ref=${{ env.CACHE_REPO }}
