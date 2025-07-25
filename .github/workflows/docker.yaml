@@ -17,13 +17,13 @@ env:
 
 on:
   push:
-    branches: ["main"]
+    branches: ["master"]
   pull_request:
   merge_group:
 
 jobs:
   build-main:
-    if: github.ref_name == 'main'
+    if: github.ref_name == 'master'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
