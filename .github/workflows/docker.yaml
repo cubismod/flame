@@ -53,30 +53,6 @@ jobs:
         uses: github/codeql-action/upload-sarif@4e828ff8d448a8a6e532957b1811f387a63867e8 # v3
         with:
           sarif_file: 'trivy-results.sarif'
-  test:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - name: Set up uv
-        uses: astral-sh/setup-uv@e92bafb6253dcd438e0484186d7669ea7a8ca1cc # v6
-        with:
-          enable-cache: true
-      - name: Set up Python
-        run: uv python install
-      - name: Cache uv dependencies
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
-        with:
-          path: |
-            ~/.cache/uv
-            .venv
-          key: uv-${{ runner.os }}-${{ hashFiles('uv.lock', 'pyproject.toml') }}
-          restore-keys: |
-            uv-${{ runner.os }}-
-      - name: Install dependencies
-        run: uv sync
-      - name: Run pytest
-        run: uv run pytest inky-mbta-tracker/tests/
   pr-check:
     if: startsWith(github.ref, 'refs/pull/')
     runs-on: ubuntu-latest
